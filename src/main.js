@@ -691,9 +691,7 @@ function buildOverlayMain() {
       // Determine painted count for this color (numerator)
       const paintedByKey = templateManager?.colorPaintedByKey || {};
       const paintedCount = paintedByKey[rgb] || 0;
-      const paintedStr = new Intl.NumberFormat().format(paintedCount);
-      const totalStr = new Intl.NumberFormat().format(meta.count || 0);
-      let labelText = `${Math.abs(totalStr - paintedStr)}`;
+      let labelText = `${paintedCount - (meta.count || 0)}`;
       if (paintedCount / meta.count == 1 && hidePainted) {
         continue;
       }
