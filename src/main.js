@@ -669,7 +669,7 @@ function buildOverlayMain() {
 
     listContainer.innerHTML = '';
     const entries = Object.entries(t.colorPalette)
-      .sort((a,b) => b[1].count - a[1].count); // sort by frequency desc
+      .sort((a,b) => (b[1].count - b[1].colorPaintedByKey) - (a[1].count - a[1].colorPaintedByKey)); // sort by frequency desc
 
     for (const [rgb, meta] of entries) {
       let row = document.createElement('div');
@@ -691,9 +691,7 @@ function buildOverlayMain() {
       // Determine painted count for this color (numerator)
       const paintedByKey = templateManager?.colorPaintedByKey || {};
       const paintedCount = paintedByKey[rgb] || 0;
-      const paintedStr = new Intl.NumberFormat().format(paintedCount);
-      const totalStr = new Intl.NumberFormat().format(meta.count || 0);
-      let labelText = `${(meta.count || 0) - paintedCount} ${paintedStr}/${totalStr}`;
+      let labelText = `${(meta.count || 0) - paintedCount} left`;
       if (paintedCount / meta.count == 1 && hidePainted) {
         continue;
       }
