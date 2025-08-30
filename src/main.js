@@ -693,7 +693,7 @@ function buildOverlayMain() {
       const paintedCount = paintedByKey[rgb] || 0;
       const paintedStr = new Intl.NumberFormat().format(paintedCount);
       const totalStr = new Intl.NumberFormat().format(meta.count || 0);
-      let labelText = `$${paintedCount - (meta.count || 0)} ${paintedStr}/${totalStr}`;
+      let labelText = `${(meta.count || 0) - paintedCount} ${paintedStr}/${totalStr}`;
       if (paintedCount / meta.count == 1 && hidePainted) {
         continue;
       }
